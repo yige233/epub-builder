@@ -1,0 +1,19 @@
+{
+  "name": "terra-a-journey-epub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/build.js",
+  "scripts": {
+    "build": "node tools/build.js",
+    "preview": "node tools/preview.js"
+  },
+  "keywords": [],
+  "author": "yige233",
+  "license": "Apache-2.0",
+  "type": "module",
+  "dependencies": {
+    "font-spider": "^1.3.5",
+    "mime-types": "^2.1.35",
+    "otf2ttf": "^1.1.2"
+  }
+}

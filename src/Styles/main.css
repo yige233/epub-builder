@@ -1,0 +1,11 @@
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* 页面分页。使用<div class="break-page"></div>，在单个文档内插入分页。 */
+div.break-page {
+  page-break-after: always;
+}

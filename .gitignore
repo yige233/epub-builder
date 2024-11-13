@@ -1,0 +1,13 @@
+build
+dist
+kindlegen-temp
+node_modules
+src/*.lnk
+*.epub
+*.mobi*
+file-info.txt
+tools/*.*
+tools/7z/*
+tools/kindlegen/*
+!tools/build.js
+!tools/preview.js

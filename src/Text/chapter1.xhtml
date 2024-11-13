@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops">
+  <head>
+    <link rel="stylesheet" type="text/css" href="../Styles/main.css" />
+    <title></title>
+  </head>
+
+  <body>
+    <div>
+      <h1>EPUB 电子书 工具链</h1>
+      <p>一套简单的基于 nodejs 的电子书构建工具，用于从 XHTML 文档构建 Epub。</p>
+      <ul>
+        <li>由用户手动执行打包，避免在编辑体积较大的 epub 时，保存会花费较长时间的问题。</li>
+        <li>css 和 html 内容完全由使用者控制，可以用你最喜欢的编辑器编辑。</li>
+        <li>打包时，使用的字体会先通过 font-spider 裁剪，减小最终的字体体积。</li>
+        <li>自动构建<code>toc.ncx</code>和<code>content.opf</code>。</li>
+      </ul>
+      <h2>使用</h2>
+      <p>所需环境：<a>Node.js</a>；</p>
+      <ol>
+        <li>安装依赖：<code>npm install</code></li>
+        <li>
+          下载
+          <a>7z</a>，并确保能够在<code>tools/7z</code>下找到<code>7za</code>可执行文件。
+        </li>
+        <li>可选的，下载 <code>kindlegen</code>，以构建 mobi 格式的电子书：<a>Kindle 实用工具 – 书伴</a>，并确保能够在<code>tools/kindlegen</code>下找到<code>kindlegen</code>可执行文件。</li>
+        <li>
+          可选的，下载<a>simple http server</a>，并确保在<code>tools</code>下找到<code>simplehttpserver</code>可执行文件。
+          <ul>
+            <li>通过浏览器实时预览电子书：<code>npm run preview [?host] [?port]</code>。预览的样式仅供参考。</li>
+          </ul>
+        </li>
+        <li>
+          构建电子书：<code>npm run build [?no-mobi]</code>
+          <ul>
+            <li>使用<code>npm run build no-mobi</code>，可不构建 mobi。</li>
+          </ul>
+        </li>
+      </ol>
+      <h2>manifest.json</h2>
+      <p>在<code>src</code>下定义了一个<code>manifest.json</code>文件，用来存储电子书的元数据，如标题、作者、封面、简介、阅读顺序等。比较重要的属性将在下方进行额外说明。</p>
+      <ul>
+        <li><code>id</code>：电子书的唯一标识符。可以使用 ISBN，也可以去生成一个随机 uuid。</li>
+        <li>
+          <code>assetsPath</code>：电子书资源的路径。其下有四个属性，分别对应文本、图片、字体和样式。epub 构建程序会自动将这些资源打包到电子书中。所有的文件都建议使用英文文件名。
+          <ul>
+            <li>
+              <code>text</code
+              >：文本资源，如<code>.xhtml</code>文件。<strong>必须要包含一个<code>nav</code>（忽略扩展名，下同）文件</strong>，以从中构建目录；<strong>必须要包含一个<code>cover</code>文件</strong>，以从将其作为
+              html 封面。
+            </li>
+            <li><code>image</code>：图片资源。<strong>必须要包含一个<code>cover</code>文件</strong>，以作为图片封面。</li>
+            <li><code>font</code>：字体资源。建议仅使用 ttf 格式字体，以保证兼容性。</li>
+            <li><code>style</code>：样式资源。最终的样式实现以目标阅读器显示的为准。</li>
+          </ul>
+        </li>
+        <li><code>toc</code>：目录，或者说阅读器按照何种顺序显示<code>text</code>中的内容。这是一个数组，其中的每个元素都是<code>text</code>中去除了扩展名的文件名。</li>
+      </ul>
+      <h2>nav.xhtml</h2>
+      <p>
+        可以在<code>nav</code>文件中使用一个目录占位符<code>${toc}</code>，该占位符用于向<code>nav</code>中插入逻辑目录，该目录从<code>nav</code>中的<code>&lt;a&gt;</code>标签中获取。使用者可专注于目录的显示效果。
+      </p>
+      <h2>conver.xhtml</h2>
+      <p>该文档中的<code>&lt;image&gt;</code>标签的<code>height</code>和<code>width</code>属性，需要根据实际的图片大小来设置。</p>
+    </div>
+  </body>
+</html>

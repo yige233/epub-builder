@@ -1,0 +1,19 @@
+{
+  "lang": "zh-CN",
+  "title": "电子书的标题",
+  "subtitle": "电子书的副标题",
+  "publisher": "出版社",
+  "isbn": "ISBN",
+  "author": "作者",
+  "date": "出版日期",
+  "rights": "版权",
+  "id": "电子书的唯一id",
+  "assetsPath": {
+    "image": "Images",
+    "style": "Styles",
+    "font": "Fonts",
+    "text": "Text"
+  },
+  "desc": [],
+  "toc": ["cover", "nav", "chapter1"]
+}
