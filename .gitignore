@@ -9,5 +9,7 @@ file-info.txt
 tools/*.*
 tools/7z/*
 tools/kindlegen/*
+!tools/7z/.gitkeep
+!tools/kindlegen/.gitkeep
 !tools/build.js
 !tools/preview.js

@@ -54,6 +54,11 @@ function waitHandleErr(taskName) {
     );
   };
 }
+async function removeGitKeep(dir) {
+  const fileList = await fs.readdir(path.join(dir), { recursive: true });
+  const gitkeeps = fileList.filter((i) => i.endsWith(".gitkeep"));
+  await Promise.all(gitkeeps.map((i) => fs.rm(path.join(dir, i))));
+}
 /**
  * 构建文件id列表
  * @param {string} epubDir epub文件夹位置
@@ -267,6 +272,7 @@ try {
   console.log("裁剪字体……");
   await waitHandleErr("裁剪字体")(shellExec()("npx", "font-spider", path.join(epubDir, "OEBPS", manifest.assetsPath.text) + "/*"));
   await fs.rm(path.join(epubDir, "OEBPS", manifest.assetsPath.font, ".font-spider"), { recursive: true, force: true });
+  await removeGitKeep(epubDir);
 
   console.log("压缩电子书为epub文件……");
   await waitHandleErr("构建epub文件")(shellExec()(nanaZipdir, "a", `"${epubFile}"`, "./" + epubDir + "/*"));
